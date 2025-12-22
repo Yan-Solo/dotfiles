@@ -1,0 +1,24 @@
+# Settings
+bind -s 'set completion-ignore-case on'
+
+# FUNC #
+function b64() {
+    base64 -i $1 | tr -d '\n' | wl-copy
+}
+
+# ALIAS #
+alias copy=wl-copy
+alias k=kubecolor
+alias paste=wl-paste
+alias vi=nvim
+alias vim=nvim
+alias ta='terraform apply'
+alias taa='terraform apply -auto-approve'
+alias td='terraform destroy'
+alias tda='terraform destroy -auto-approve'
+alias tf=terraform
+alias tp='terraform plan'
+alias zed=zeditor
+
+# STARSHIP
+eval "$(starship init bash)"
