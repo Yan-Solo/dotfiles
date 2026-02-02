@@ -15,8 +15,10 @@ in {
   config = lib.mkIf cfg {
     home.packages = with pkgs; [
       ansible
+      dig
       git
       go
+      inetutils
       jq
       k9s
       kubectl
