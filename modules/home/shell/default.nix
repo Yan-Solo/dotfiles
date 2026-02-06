@@ -16,6 +16,7 @@ in {
       bash
       btop
       git
+      htop
       neovim
       starship
       vimPlugins.nvchad
