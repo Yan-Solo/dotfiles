@@ -13,6 +13,24 @@
 
     networking.networkmanager.wifi.powersave = false;
 
+    # Disable broken sleep and configure hibernate on lid close/power button
+    services.logind.settings.Login = {
+      HandleLidSwitchDocked = "hibernate";
+      HandleLidSwitchExternalPower = "hibernate";
+      HandleLidSwitch = "hibernate";
+      HandleHibernateKey = "hibernate";
+      HandleSuspendKey = "hibernate";
+      HandlePowerKey = "hibernate";
+    };
+
+    # Disable sleep entirely (use hibernate instead)
+    systemd.sleep.extraConfig = ''
+      AllowSuspend=no
+      AllowHibernation=yes
+      AllowSuspendThenHibernate=no
+      AllowHybridSleep=no
+    '';
+
     systemSettings = {
       users = [ "jan" ];
       adminUsers = [ "jan" ];
@@ -31,49 +49,6 @@
           cursor-size = 24;
         };
       };
-    };
-
-    # Configure systemd to redirect suspend to hibernate
-    systemd.sleep.extraConfig = ''
-      SuspendMode=
-      SuspendState=disk
-      HibernateMode=shutdown
-      HibernateState=disk
-      HybridSleepMode=shutdown
-      HybridSleepState=disk
-    '';
-
-    # Create systemd service overrides to redirect suspend calls to hibernate
-    systemd.services.systemd-suspend = {
-      serviceConfig = {
-        ExecStart = [
-          ""  # Clear the existing ExecStart
-          "${pkgs.stdenv.hostPlatform.system}/bin/systemctl hibernate"
-        ];
-      };
-    };
-
-    systemd.services.systemd-hybrid-sleep = {
-      serviceConfig = {
-        ExecStart = [
-          ""  # Clear the existing ExecStart
-          "${pkgs.stdenv.hostPlatform.system}/bin/systemctl hibernate"
-        ];
-      };
-    };
-
-    # Configure systemd-logind to hibernate instead of suspend
-    services.logind.settings.Login = {
-      HandlePowerKey = "hibernate";
-      HandlePowerKeyLongPress = "hibernate";
-      HandleLidSwitch = "hibernate";
-      HandleLidSwitchExternalPower = "hibernate";
-      HandleLidSwitchDocked = "ignore";
-      HandleSuspendKey = "hibernate";
-      HandleSuspendKeyLongPress = "hibernate";
-      HandleHibernateKey = "hibernate";
-      IdleAction = "hibernate";
-      IdleActionSec = "30min";
     };
   };
 }
