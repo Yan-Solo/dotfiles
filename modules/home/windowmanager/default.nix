@@ -7,7 +7,7 @@ in {
     userSettings.windowmanager = lib.mkOption {
       default = "mangowc";
       description = "Window manager to deploy";
-      type = lib.types.enum [ "mangowc" ];
+      type = lib.types.enum [ "mangowc" "gnome" ];
     };
   };
 

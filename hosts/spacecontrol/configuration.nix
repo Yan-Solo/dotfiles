@@ -11,14 +11,26 @@
     boot.resumeDevice = "/dev/disk/by-uuid/081478af-256a-45ae-98b7-c046acee5fd0";
     boot.plymouth.enable = true;
 
+    networking.networkmanager.wifi.powersave = false;
+
     systemSettings = {
       users = [ "jan" ];
       adminUsers = [ "jan" ];
       powerprofiles = false;
+      displayManager = "gdm";
+      windowManager = "gnome";
     };
 
     home-manager.users.jan = {
       home.stateVersion = "25.11";
+      userSettings.windowmanager = "gnome";
+
+      dconf.settings = {
+        "org/gnome/desktop/interface" = {
+          cursor-theme = "Adwaita";
+          cursor-size = 24;
+        };
+      };
     };
 
     # Configure systemd to redirect suspend to hibernate

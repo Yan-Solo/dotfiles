@@ -1,7 +1,7 @@
 { config, lib, pkgs, inputs, ... }:
 
 let
-  cfg = config.systemSettings.windowManager;
+  displayManager = config.systemSettings.displayManager;
 in {
   options = {
     systemSettings.mangowc = lib.mkOption {
@@ -11,7 +11,7 @@ in {
     };
   };
 
-  config = {
+  config = lib.mkIf (displayManager == "greetd") {
     environment.systemPackages = with pkgs; [
       quickshell
       xfce.thunar

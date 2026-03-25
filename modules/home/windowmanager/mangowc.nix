@@ -10,7 +10,7 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && config.userSettings.windowmanager == "mangowc") {
     home.file = lib.genAttrs
       (builtins.attrNames (builtins.readDir dotsDir))
       (name: {
