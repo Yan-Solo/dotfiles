@@ -18,6 +18,7 @@ in {
       go
       jq
       nodejs_24
+      obsidian
       pnpm_9
       ripgrep
       yamllint

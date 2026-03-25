@@ -23,6 +23,7 @@ in {
       k9s
       kubectl
       kubecolor
+      obsidian
       ripgrep
       sshuttle
       terraform
