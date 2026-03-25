@@ -15,6 +15,7 @@ in {
     home.packages = with pkgs; [
       bash
       btop
+      gcc # This is in here because it's required for my neovim configuration
       git
       htop
       neovim
