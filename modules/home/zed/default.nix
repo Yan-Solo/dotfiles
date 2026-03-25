@@ -19,13 +19,16 @@ in {
     programs.zed-editor = {
       enable = true;
 
-      extensions = [ "nix" ];
+      extensions = [
+        "nix"
+        "macOS Classic Theme"
+      ];
 
       userSettings = {
         theme = {
           mode = "system";
-          dark = "Ayu Dark";
-          light = "One Light";
+          dark = "macOS Classic Dark";
+          light = "macOS Classic Light";
         };
 
         vim_mode = true;
@@ -47,6 +50,8 @@ in {
           diagnostics = false;
           metrics = false;
         };
+
+        window_decorations = "server";
       };
 
       userKeymaps = [
